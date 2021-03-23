@@ -17,7 +17,7 @@ import {
 import {Icon, Badge, ListItem} from 'react-native-elements';
 import {styles} from '../styles';
 import {MenuIcon} from '../components';
-
+import {useSelector} from 'react-redux';
 const windowHeight = Dimensions.get('screen').height;
 
 const Home = props => {
@@ -28,7 +28,7 @@ const Home = props => {
       text: 'wallet',
     },
     {
-      name: 'article',
+      name: 'description',
       color: 'salmon',
       text: 'article',
     },
@@ -101,6 +101,8 @@ const Home = props => {
     props.navigation.push('Reim');
   };
 
+  const {username} = useSelector(state => state.Auth);
+
   const renderMenu = () => {
     return data.map((val, index) => {
       return <MenuIcon key={index} data={val} />;
@@ -124,7 +126,7 @@ const Home = props => {
             }}>
             <View>
               <Text style={{fontSize: 30, color: 'white', fontWeight: '700'}}>
-                Michael Scott
+                {username}
               </Text>
               <Text style={{color: 'white'}}>General Manager</Text>
             </View>
@@ -193,7 +195,7 @@ const Home = props => {
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>
-                  <Icon name="calendar-today" color="gray" />
+                  <Icon name="today" color="gray" />
                 </View>
                 <View style={{flex: 5, justifyContent: 'center'}}>
                   <Text style={{fontSize: 12}}>Request</Text>
@@ -282,98 +284,6 @@ const Home = props => {
           </ListItem>
         </View>
       </ScrollView>
-      {/* nav button start */}
-      {/* <View
-        style={{
-          backgroundColor: 'white',
-          height: windowHeight / 15,
-          flexDirection: 'row',
-          paddingHorizontal: 5,
-          alignItems: 'center',
-          shadowColor: '#000',
-          shadowOffset: {
-            width: 0,
-            height: 6,
-          },
-          shadowOpacity: 0.39,
-          shadowRadius: 8.3,
-
-          elevation: 13,
-        }}>
-        <TouchableWithoutFeedback onPress={() => onMenuPress('home')}>
-          <View style={{width: '25%'}}>
-            <Icon name="home" color={page === 'home' ? '#ca2c37' : '#c7c7c7'} />
-            <Text
-              style={{
-                textAlign: 'center',
-                fontSize: 10,
-                color: page === 'home' ? '#ca2c37' : '#c7c7c7',
-              }}>
-              Home
-            </Text>
-          </View>
-        </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback onPress={() => onMenuPress('news')}>
-          <View style={{width: '25%'}}>
-            <Icon
-              name="message"
-              color={page === 'news' ? '#ca2c37' : '#c7c7c7'}
-            />
-            <Text
-              style={{
-                textAlign: 'center',
-                fontSize: 10,
-                color: page === 'news' ? '#ca2c37' : '#c7c7c7',
-              }}>
-              News
-            </Text>
-          </View>
-        </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback onPress={() => onMenuPress('books')}>
-          <View style={{width: '25%'}}>
-            <Badge
-              value={99}
-              badgeStyle={{
-                position: 'absolute',
-                right: 20,
-                elevation: 10,
-                backgroundColor: '#ca2c37',
-              }}
-              textStyle={{
-                fontSize: 10,
-              }}
-            />
-            <Icon
-              name="book"
-              color={page === 'books' ? '#ca2c37' : '#c7c7c7'}
-            />
-            <Text
-              style={{
-                textAlign: 'center',
-                fontSize: 10,
-                color: page === 'books' ? '#ca2c37' : '#c7c7c7',
-              }}>
-              Books
-            </Text>
-          </View>
-        </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback onPress={() => onMenuPress('users')}>
-          <View style={{width: '25%'}}>
-            <Icon
-              name="account-circle"
-              color={page === 'users' ? '#ca2c37' : '#c7c7c7'}
-            />
-            <Text
-              style={{
-                textAlign: 'center',
-                fontSize: 10,
-                color: page === 'users' ? '#ca2c37' : '#c7c7c7',
-              }}>
-              users
-            </Text>
-          </View>
-        </TouchableWithoutFeedback>
-      </View> */}
     </SafeAreaView>
   );
 };

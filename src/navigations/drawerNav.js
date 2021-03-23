@@ -3,21 +3,14 @@ import React from 'react';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
-  DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
 import {View, Text, Button} from 'react-native';
 import {Icon, Badge} from 'react-native-elements';
 import StackNav from './stackNav';
-const DrawerNav = createDrawerNavigator();
+import SettingSscreen from '../screens/SettingScreen';
 
-const SettingSscreen = () => {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Setting Screen</Text>
-    </View>
-  );
-};
+const DrawerNav = createDrawerNavigator();
 
 const CustomDrawerContent = props => {
   //   console.log(props);
