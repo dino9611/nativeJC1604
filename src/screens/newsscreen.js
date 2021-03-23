@@ -8,6 +8,7 @@ import {
   StyleSheet,
   StatusBar,
   Image,
+  TouchableWithoutFeedback,
 } from 'react-native';
 
 import {Card, ListItem, Button, Icon} from 'react-native-elements';
@@ -117,14 +118,20 @@ export default function NewsScreen({navigation, route}) {
     }; // component willunmount
   }, []); // component didmount
 
+  const ToDetailPress = data => {
+    navigation.navigate('Detail', {data: data});
+  };
+
   const renderItem = ({item}) => (
-    <Card containerStyle={{padding: 0, flex: 1}}>
-      <Card.Image source={{uri: item.img}}></Card.Image>
-      <View>
-        <Text>{item.name}</Text>
-        <Text>{item.price}</Text>
-      </View>
-    </Card>
+    <TouchableWithoutFeedback onPress={() => ToDetailPress(item)}>
+      <Card containerStyle={{padding: 0, flex: 1}}>
+        <Card.Image source={{uri: item.img}}></Card.Image>
+        <View>
+          <Text>{item.name}</Text>
+          <Text>{item.price}</Text>
+        </View>
+      </Card>
+    </TouchableWithoutFeedback>
   );
 
   const onRefreshpull = () => {

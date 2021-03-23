@@ -2,6 +2,7 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {View, Text, Button} from 'react-native';
 import HomeTab from './HomeTab';
+import DetailScreen from '../screens/detailscreen';
 const Stack = createStackNavigator();
 
 function ReimbursementScreen({navigation}) {
@@ -48,6 +49,11 @@ const StackNav = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen name="Reim" component={ReimbursementScreen} />
+      <Stack.Screen
+        name="Detail"
+        options={{headerShown: false}}
+        component={DetailScreen}
+      />
       <Stack.Screen
         name="Req"
         component={ReqScreen}

@@ -19,7 +19,7 @@ import {styles} from '../styles';
 import {MenuIcon} from '../components';
 import {useSelector} from 'react-redux';
 const windowHeight = Dimensions.get('screen').height;
-
+var angka = 0;
 const Home = props => {
   const [data] = useState([
     {
@@ -64,8 +64,6 @@ const Home = props => {
     },
   ]);
 
-  const [back, setback] = useState(0);
-
   const backAction = () => {
     //using alert
     // Alert.alert('Hold on!', 'Are you sure you want to go back?', [
@@ -78,23 +76,29 @@ const Home = props => {
     // ]);
 
     // using toast
-    if (back === 0) {
-      setback(1);
-      ToastAndroid.show('1 click back again if you wanna back', 3000);
+    if (angka === 0) {
+      angka = 1;
+      ToastAndroid.show('1 click back again if you wanna back', 2000);
     } else {
       BackHandler.exitApp();
     }
-    console.log(back);
 
     return true; //jangan lupa returnnya true
   };
 
   useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', backAction);
-
-    return () =>
+    const unsubscribe = props.navigation.addListener('focus', () => {
+      // Screen was focused
+      // Do something
+      angka = 0;
+      BackHandler.addEventListener('hardwareBackPress', backAction);
+    });
+    props.navigation.addListener('blur', () => {
       BackHandler.removeEventListener('hardwareBackPress', backAction);
-  }); //component didmount
+    });
+
+    return () => unsubscribe;
+  }, [props.navigation]); //component didmount
   // console.log(back);
 
   const OnReimbursePress = () => {

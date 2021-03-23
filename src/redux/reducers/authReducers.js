@@ -1,7 +1,7 @@
 import {LOGIN, SETLOADING, LOGOUT} from '../type';
 
 const INITIAL_STATE = {
-  username: 'Dino Scott',
+  username: '',
   isLogin: false,
   isloading: true,
 };
