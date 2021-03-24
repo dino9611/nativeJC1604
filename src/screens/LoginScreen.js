@@ -6,13 +6,16 @@ import {
   SafeAreaView,
   Keyboard,
   TouchableWithoutFeedback,
+  Alert,
 } from 'react-native';
 import {Input, Button, Icon} from 'react-native-elements';
 import {useDispatch} from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {LOGIN} from '../redux/type';
+import axios from 'axios';
+import {API_URL} from '../helper';
 
-export default () => {
+export default ({navigation}) => {
   const dispatch = useDispatch();
   const [focus, setfocus] = useState('');
   const [secure, setsecure] = useState(true);
@@ -23,8 +26,18 @@ export default () => {
 
   const onLoginPress = async () => {
     try {
-      await AsyncStorage.setItem('username', Logindata.username);
-      dispatch({type: LOGIN, payload: Logindata});
+      const {data} = await axios.get(`${API_URL}/users`, {
+        params: {
+          username: Logindata.username,
+          password: Logindata.password,
+        },
+      });
+      if (data.length) {
+        await AsyncStorage.setItem('username', data[0].username);
+        dispatch({type: LOGIN, payload: data[0]});
+      } else {
+        Alert.alert('Login', 'User tidak ditemukan');
+      }
     } catch (error) {
       console.log(error);
     }

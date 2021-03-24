@@ -5,14 +5,15 @@ import {NavigationContainer} from '@react-navigation/native';
 import DrawerNavigator from './src/navigations/drawerNav';
 import AuthStack from './src/navigations/AuthStack';
 import {connect} from 'react-redux';
-import {KeepLogin} from './src/redux/actions';
+import {KeepLogin, GetProductAction} from './src/redux/actions';
 import {View, Text} from 'react-native';
 
-const App = ({dataUser, KeepLogin}) => {
+const App = ({dataUser, KeepLogin, GetProductAction}) => {
   // console.log(dataUser);
   // keep login feature
   useEffect(() => {
     KeepLogin();
+    GetProductAction();
   }, []);
 
   if (dataUser.isloading) {
@@ -42,4 +43,4 @@ const MapstatetoProps = ({Auth}) => {
   };
 };
 
-export default connect(MapstatetoProps, {KeepLogin})(App);
+export default connect(MapstatetoProps, {KeepLogin, GetProductAction})(App);
