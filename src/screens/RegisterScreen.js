@@ -19,24 +19,43 @@ export default ({navigation}) => {
   const dispatch = useDispatch();
   const [focus, setfocus] = useState('');
   const [secure, setsecure] = useState(true);
-  const [Logindata, setlogindata] = useState({
+  //   const [error, seterror] = useState('');
+  const [secureconf, setsecureconf] = useState(true);
+  const [Regisdata, setRegisdata] = useState({
     username: '',
     password: '',
+    confpass: '',
   });
 
-  const onLoginPress = async () => {
+  const onRegisPress = async () => {
     try {
-      const {data} = await axios.get(`${API_URL}/users`, {
-        params: {
-          username: Logindata.username,
-          password: Logindata.password,
-        },
-      });
-      if (data.length) {
-        await AsyncStorage.setItem('username', data[0].username);
-        dispatch({type: LOGIN, payload: data[0]});
+      if (Regisdata.password === Regisdata.confpass) {
+        const {data} = await axios.get(`${API_URL}/users`, {
+          params: {
+            username: Regisdata.username,
+          },
+        });
+        if (data.length) {
+          Alert.alert('Register', 'Username Sudah ada');
+        } else {
+          const data = {
+            username: Regisdata.username,
+            password: Regisdata.password,
+            cart: [],
+            role: 'user',
+          };
+          const res = await axios.post(`${API_URL}/users`, data);
+          console.log(res.status);
+          //? disclaimer karena json-servernya nggak tetap jadi anggapsa ja klo statusnya 200an itu berhasil
+          //? dan data yang disimpan annti adalah axios yang didapa dari id 1
+          if (res.status >= 200 && res.status < 300) {
+            const userdata = await axios.get(`${API_URL}/users/1`);
+            await AsyncStorage.setItem('username', userdata.data.username);
+            dispatch({type: LOGIN, payload: userdata.data});
+          }
+        }
       } else {
-        Alert.alert('Login', 'User tidak ditemukan');
+        Alert.alert('Register', 'confirmasi password salah');
       }
     } catch (error) {
       console.log(error);
@@ -44,7 +63,7 @@ export default ({navigation}) => {
   };
 
   const oninputChange = (text, props) => {
-    setlogindata({...Logindata, [props]: text});
+    setRegisdata({...Regisdata, [props]: text});
   };
 
   return (
@@ -62,13 +81,13 @@ export default ({navigation}) => {
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <Text style={{fontSize: 30, color: '#ca2c37'}}> LOGIN</Text>
+          <Text style={{fontSize: 30, color: '#ca2c37'}}>Register</Text>
           <Input
             // placeholder="username"
             label="Username"
-            value={Logindata.username}
+            value={Regisdata.username}
             onChangeText={text => oninputChange(text, 'username')}
-            // errorMessage="dasdasd"
+            // errorMessage={error}
             labelStyle={{color: focus === 'username' ? '#ca2c37' : 'gray'}}
             leftIcon={{
               name: 'account-circle',
@@ -82,7 +101,7 @@ export default ({navigation}) => {
           />
           <Input
             label="Password"
-            value={Logindata.password}
+            value={Regisdata.password}
             onChangeText={text => oninputChange(text, 'password')}
             labelStyle={{color: focus === 'password' ? '#ca2c37' : 'gray'}}
             leftIcon={{
@@ -103,23 +122,46 @@ export default ({navigation}) => {
             }
             onFocus={() => setfocus('password')}
           />
+          <Input
+            label="Confirm password"
+            value={Regisdata.confpass}
+            onChangeText={text => oninputChange(text, 'confpass')}
+            labelStyle={{color: focus === 'confpass' ? '#ca2c37' : 'gray'}}
+            leftIcon={{
+              name: 'lock',
+              color: focus === 'confpass' ? '#ca2c37' : 'gray',
+            }}
+            secureTextEntry={secureconf}
+            inputContainerStyle={{
+              borderColor: focus === 'confpass' ? '#ca2c37' : 'gray',
+              borderBottomWidth: focus === 'confpass' ? 2 : 1,
+            }}
+            rightIcon={
+              <Icon
+                name={secureconf ? 'visibility-off' : 'visibility'}
+                color={secureconf ? 'lightgray' : '#ca2c37'}
+                onPress={() => setsecureconf(!secureconf)}
+              />
+            }
+            onFocus={() => setfocus('confpass')}
+          />
           <Button
-            title={'Login'}
+            title={'Register'}
             type="outline"
             containerStyle={{width: '100%'}}
             titleStyle={{color: '#ca2c37'}}
             buttonStyle={{borderColor: '#ca2c37'}}
             raised
-            onPress={onLoginPress}
+            onPress={onRegisPress}
           />
           <Text>Or</Text>
           <Button
-            title={'To Register'}
+            title={'To Login'}
             containerStyle={{width: '100%'}}
             // titleStyle={{color: '#ca2c37'}}
             buttonStyle={{backgroundColor: '#ca2c37'}}
             raised
-            onPress={() => navigation.navigate('Register')}
+            onPress={() => navigation.navigate('Login')}
           />
         </View>
       </TouchableWithoutFeedback>

@@ -105,7 +105,7 @@ const Home = props => {
     props.navigation.push('Reim');
   };
 
-  const {username} = useSelector(state => state.Auth);
+  const {username, role} = useSelector(state => state.Auth);
 
   const renderMenu = () => {
     return data.map((val, index) => {

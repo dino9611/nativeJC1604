@@ -19,6 +19,7 @@ const windowHeight = Dimensions.get('window').height;
 class DetailScreen extends Component {
   state = {
     loading: false,
+    description: false,
   };
 
   onAddTocartPress = async () => {
@@ -74,6 +75,17 @@ class DetailScreen extends Component {
           <View>
             <Text style={{fontSize: 30, fontWeight: '600'}}> {name}</Text>
             <Text style={{fontSize: 20, fontWeight: '600'}}> {price}</Text>
+            <Button
+              title="description"
+              onPress={() =>
+                this.setState({description: !this.state.description})
+              }
+            />
+            {this.state.description ? (
+              <Text style={{fontSize: 20, fontWeight: '600'}}>
+                {description}
+              </Text>
+            ) : null}
           </View>
         </ScrollView>
         <View
