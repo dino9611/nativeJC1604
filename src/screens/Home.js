@@ -18,6 +18,8 @@ import {Icon, Badge, ListItem} from 'react-native-elements';
 import {styles} from '../styles';
 import {MenuIcon} from '../components';
 import {useSelector} from 'react-redux';
+import * as Animatable from 'react-native-animatable';
+
 const windowHeight = Dimensions.get('screen').height;
 var angka = 0;
 const Home = props => {
@@ -231,7 +233,11 @@ const Home = props => {
             </View>
           </ScrollView>
         </View>
-        <View
+        <Animatable.View
+          animation="slideInUp"
+          // duration={1000}
+          easing={'ease-in'}
+          useNativeDriver={true}
           style={{
             // height: windowHeight / 3,
             backgroundColor: 'white',
@@ -286,7 +292,7 @@ const Home = props => {
               12 August 2021
             </ListItem.Subtitle>
           </ListItem>
-        </View>
+        </Animatable.View>
       </ScrollView>
     </SafeAreaView>
   );

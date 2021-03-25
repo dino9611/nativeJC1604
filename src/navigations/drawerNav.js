@@ -1,42 +1,12 @@
 import React from 'react';
 
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItem,
-} from '@react-navigation/drawer';
-import {View, Text, Button} from 'react-native';
-import {Icon, Badge} from 'react-native-elements';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+
 import StackNav from './stackNav';
 import SettingSscreen from '../screens/SettingScreen';
+import CustomDrawerContent from '../components/CustomDrawerContent';
 
 const DrawerNav = createDrawerNavigator();
-
-const CustomDrawerContent = props => {
-  //   console.log(props);
-  return (
-    <View style={{flex: 1}}>
-      <DrawerContentScrollView {...props}>
-        <DrawerItem
-          label="Setting"
-          onPress={() => props.navigation.navigate('Setting')}
-          activeTintColor={'tomato'}
-          icon={() => {
-            return (
-              <Icon
-                name={'cog'}
-                type="font-awesome"
-                // size={propssize}
-                color={'gray'}
-              />
-            );
-          }}
-          activeBackgroundColor={'blue'}
-        />
-      </DrawerContentScrollView>
-    </View>
-  );
-};
 
 export default DrawerNavigator = () => {
   return (
