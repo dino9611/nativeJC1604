@@ -65,7 +65,7 @@ const Home = props => {
       text: 'love',
     },
   ]);
-
+  const IsdarkMode = useSelector(state => state.isDark);
   const backAction = () => {
     //using alert
     // Alert.alert('Hold on!', 'Are you sure you want to go back?', [
@@ -240,7 +240,7 @@ const Home = props => {
           useNativeDriver={true}
           style={{
             // height: windowHeight / 3,
-            backgroundColor: 'white',
+            backgroundColor: IsdarkMode ? '#292929' : 'white',
             borderTopRightRadius: 10,
             borderTopLeftRadius: 10,
           }}>
@@ -254,9 +254,13 @@ const Home = props => {
             <Text style={{fontSize: 19, fontWeight: '600'}}>Announcement</Text>
             <Text style={{marginTop: 5, color: 'steelblue'}}>View All</Text>
           </View>
-          <ListItem bottomDivider>
+          <ListItem
+            containerStyle={{backgroundColor: IsdarkMode ? '#292929' : 'white'}}
+            bottomDivider>
             <ListItem.Content>
-              <ListItem.Title>New Family member</ListItem.Title>
+              <ListItem.Title style={{color: IsdarkMode ? 'white' : 'black'}}>
+                New Family member
+              </ListItem.Title>
               <ListItem.Subtitle>Pam Beesly</ListItem.Subtitle>
             </ListItem.Content>
             <Badge containerStyle={{marginTop: -15, marginRight: -10}} />

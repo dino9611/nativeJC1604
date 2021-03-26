@@ -6,10 +6,13 @@ import NewsScreen from '../screens/newsscreen';
 import Userscreen from '../screens/usersscreen';
 import Bookscreen from '../screens/bookscreen';
 import {Icon, Badge} from 'react-native-elements';
+import {useSelector, useDispatch} from 'react-redux';
 
 const BottomTab = createBottomTabNavigator();
 
 const HomeTab = () => {
+  const IsdarkMode = useSelector(state => state.isDark);
+
   return (
     <BottomTab.Navigator
       screenOptions={({route}) => {
@@ -53,6 +56,9 @@ const HomeTab = () => {
       tabBarOptions={{
         inactiveTintColor: 'lightgray',
         activeTintColor: '#ca2c37',
+        tabStyle: {
+          backgroundColor: IsdarkMode ? '#292929' : 'white',
+        },
       }}>
       <BottomTab.Screen name="Home" component={Home} />
       <BottomTab.Screen name="News" component={NewsScreen} />

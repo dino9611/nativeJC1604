@@ -20,4 +20,8 @@ export const styles = StyleSheet.create({
   kotak1: {
     backgroundColor: 'pink',
   },
+  ketengah: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
