@@ -9,17 +9,18 @@ import {KeepLogin, GetProductAction} from './src/redux/actions';
 import messaging from '@react-native-firebase/messaging';
 import Splashscreen from './src/screens/Splashscreen';
 import PushNotification from 'react-native-push-notification';
+import {Alert} from 'react-native';
 const App = ({dataUser, KeepLogin, GetProductAction}) => {
-  // console.log(dataUser);
   // keep login feature
   useEffect(() => {
     KeepLogin();
     GetProductAction();
+    // foreground notification handler
     const unsubscribe = messaging().onMessage(async remoteMessage => {
       console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));
       PushNotification.localNotification({
-        title: 'coba foreground',
-        message: 'tes foreground',
+        title: remoteMessage.notification.title,
+        message: remoteMessage.notification.body,
       });
     });
 
@@ -38,10 +39,6 @@ const App = ({dataUser, KeepLogin, GetProductAction}) => {
             });
           messaging().onTokenRefresh(token => {
             console.log('messaging.onTokenRefresh: ', token);
-            // PushNotification.localNotification({
-            //   title: 'coba foreground',
-            //   message: 'tes foreground',
-            // });
           });
           messaging().onNotificationOpenedApp(remoteMessage => {
             console.log(
@@ -58,7 +55,6 @@ const App = ({dataUser, KeepLogin, GetProductAction}) => {
                   );
                 }
               });
-            //this.forwardToSearchPage(remoteMessage.data.word);
           });
         }
       })
@@ -66,8 +62,8 @@ const App = ({dataUser, KeepLogin, GetProductAction}) => {
         console.log('messageing.requestPermission :', err);
       });
 
-    return unsubscribe;
-  }, []);
+    return unsubscribe; //component willunmount
+  }, []); // component didmount
 
   if (dataUser.isloading) {
     return <Splashscreen />;

@@ -15,7 +15,7 @@ export default function Bookscreen({navigation, route}) {
   // tanpa destructuring props.route
   useEffect(() => {
     axios
-      .get('http://localhost:8081/users')
+      .get('http://43b1fc811a29.ngrok.io/users')
       .then(res => {
         console.log(res.data);
       })
