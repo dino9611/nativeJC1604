@@ -43,6 +43,15 @@ export default function Userscreen({navigation, route}) {
       // file dikirimkan
       data.append('image', img);
 
+      // const res= await axios.get('https://api.thecatapi.com/v1/images/search',{
+      //   headers:{
+      //     'x-api-key':'b8c7007f-fde3-40b6-997d-4f508b8b25c4'
+      //   },
+      //   params:{
+      //     limit:10
+      //   }
+      // })
+
       const res = await axios.post(
         `https://api.imgur.com/3/image`,
         data,

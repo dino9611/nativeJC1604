@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useEffect} from 'react';
 import {
   View,
   Text,
@@ -9,10 +9,20 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
 } from 'react-native';
+import axios from 'axios';
 
 export default function Bookscreen({navigation, route}) {
   // tanpa destructuring props.route
-
+  useEffect(() => {
+    axios
+      .get('http://localhost:8081/users')
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
   const password = useRef();
   return (
     <KeyboardAvoidingView

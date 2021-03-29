@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "312859289249",
+    "project_id": "learnrn-56c8d",
+    "storage_bucket": "learnrn-56c8d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:312859289249:android:209fba5c068b5283d9b2e0",
+        "android_client_info": {
+          "package_name": "com.learnnative"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "312859289249-c4i8uu1klkheblp1ab4po3bb6qlt2thp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDul_MnvdPvuMxAw8adBoNy2om3d7hoO4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "312859289249-c4i8uu1klkheblp1ab4po3bb6qlt2thp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
