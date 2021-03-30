@@ -6,9 +6,9 @@ import {Icon} from 'react-native-elements';
 import {useSelector, useDispatch} from 'react-redux';
 import {LIGHT, DARK} from '../redux/type';
 export default props => {
-  console.log(useColorScheme());
+  // console.log(useColorScheme());
   const IsdarkMode = useSelector(state => state.isDark);
-  console.log(IsdarkMode, 'isdark');
+  // console.log(IsdarkMode, 'isdark');
 
   const dispatch = useDispatch();
   const SwitchChange = () => {

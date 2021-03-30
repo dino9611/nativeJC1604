@@ -45,14 +45,17 @@ export default ({navigation}) => {
             role: 'user',
           };
           const res = await axios.post(`${API_URL}/users`, data);
-          console.log(res.status);
+          // menggunakan ngrok.com
+          await AsyncStorage.setItem('username', res.data.username);
+          dispatch({type: LOGIN, payload: res.data});
+          // ! tanpa ngrok
           //? disclaimer karena json-servernya nggak tetap jadi anggapsa ja klo statusnya 200an itu berhasil
           //? dan data yang disimpan annti adalah axios yang didapa dari id 1
-          if (res.status >= 200 && res.status < 300) {
-            const userdata = await axios.get(`${API_URL}/users/1`);
-            await AsyncStorage.setItem('username', userdata.data.username);
-            dispatch({type: LOGIN, payload: userdata.data});
-          }
+          // if (res.status >= 200 && res.status < 300) {
+          //   const userdata = await axios.get(`${API_URL}/users/1`);
+          //   await AsyncStorage.setItem('username', userdata.data.username);
+          //   dispatch({type: LOGIN, payload: userdata.data});
+          // }
         }
       } else {
         Alert.alert('Register', 'confirmasi password salah');

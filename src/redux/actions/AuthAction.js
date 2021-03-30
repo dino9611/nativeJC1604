@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {LOGIN, SETLOADING} from '../type';
+import {LOGIN, SETLOADING, UPDATECART} from '../type';
 import axios from 'axios';
 import {API_URL} from '../../helper';
 export const KeepLogin = () => {
@@ -22,5 +22,12 @@ export const KeepLogin = () => {
     } finally {
       dispatch({type: SETLOADING});
     }
+  };
+};
+
+export const UpdateCartAction = cart => {
+  return {
+    type: UPDATECART,
+    cart: cart,
   };
 };

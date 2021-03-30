@@ -15,7 +15,7 @@ export default () => {
       <Animatable.View
         easing={'ease-in'}
         animation="zoomIn"
-        duration={700}
+        duration={500}
         useNativeDriver={true}>
         <Image
           source={require('./../image/Cartgo.png')}
