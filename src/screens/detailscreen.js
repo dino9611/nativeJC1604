@@ -121,54 +121,58 @@ class DetailScreen extends Component {
             <Text style={{fontSize: 20, fontWeight: '600'}}>
               {currencyFormatter(price)}
             </Text>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                marginTop: 10,
-              }}>
-              <Button
-                title="-"
-                buttonStyle={{marginHorizontal: 10, borderRadius: 20}}
-                onPress={this.minusqty}
-              />
-              <Text style={{paddingVertical: 10}}>{this.state.qty}</Text>
-              <Button
-                title="+"
-                buttonStyle={{marginHorizontal: 10, borderRadius: 20}}
-                onPress={this.addQty}
-              />
-            </View>
+            {this.props.route.params.islook ? null : (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  marginTop: 10,
+                }}>
+                <Button
+                  title="-"
+                  buttonStyle={{marginHorizontal: 10, borderRadius: 20}}
+                  onPress={this.minusqty}
+                />
+                <Text style={{paddingVertical: 10}}>{this.state.qty}</Text>
+                <Button
+                  title="+"
+                  buttonStyle={{marginHorizontal: 10, borderRadius: 20}}
+                  onPress={this.addQty}
+                />
+              </View>
+            )}
           </View>
         </ScrollView>
-        <View
-          style={{
-            height: windowHeight * (1 / 10),
-            shadowColor: '#000',
-            backgroundColor: 'white',
-            shadowOffset: {
-              width: 0,
-              height: 6,
-            },
-            shadowOpacity: 0.39,
-            shadowRadius: 8.3,
-
-            elevation: 13,
-            flexDirection: 'row',
-          }}>
+        {this.props.route.params.islook ? null : (
           <View
-            style={{flex: 2, justifyContent: 'center', alignItems: 'center'}}>
-            <Text style={{fontSize: 18}}>{currencyFormatter(price)}</Text>
+            style={{
+              height: windowHeight * (1 / 10),
+              shadowColor: '#000',
+              backgroundColor: 'white',
+              shadowOffset: {
+                width: 0,
+                height: 6,
+              },
+              shadowOpacity: 0.39,
+              shadowRadius: 8.3,
+
+              elevation: 13,
+              flexDirection: 'row',
+            }}>
+            <View
+              style={{flex: 2, justifyContent: 'center', alignItems: 'center'}}>
+              <Text style={{fontSize: 18}}>{currencyFormatter(price)}</Text>
+            </View>
+            <Button
+              title="Add cart"
+              containerStyle={{flex: 3}}
+              buttonStyle={{height: '100%', backgroundColor: '#ca2c37'}}
+              titleStyle={{fontSize: 18}}
+              loading={this.state.loading}
+              onPress={this.onAddTocartPress}
+            />
           </View>
-          <Button
-            title="Add cart"
-            containerStyle={{flex: 3}}
-            buttonStyle={{height: '100%', backgroundColor: '#ca2c37'}}
-            titleStyle={{fontSize: 18}}
-            loading={this.state.loading}
-            onPress={this.onAddTocartPress}
-          />
-        </View>
+        )}
       </View>
     );
   }

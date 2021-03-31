@@ -45,7 +45,7 @@ export default ({navigation}) => {
             role: 'user',
           };
           const res = await axios.post(`${API_URL}/users`, data);
-          // menggunakan ngrok.com
+          //! menggunakan ngrok.com
           await AsyncStorage.setItem('username', res.data.username);
           dispatch({type: LOGIN, payload: res.data});
           // ! tanpa ngrok

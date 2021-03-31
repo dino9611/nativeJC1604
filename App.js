@@ -10,6 +10,7 @@ import messaging from '@react-native-firebase/messaging';
 import Splashscreen from './src/screens/Splashscreen';
 import PushNotification from 'react-native-push-notification';
 import {Alert} from 'react-native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 const App = ({dataUser, KeepLogin, GetProductAction}) => {
   // keep login feature
   useEffect(() => {
@@ -70,9 +71,11 @@ const App = ({dataUser, KeepLogin, GetProductAction}) => {
   }
 
   return (
-    <NavigationContainer>
-      {dataUser.isLogin ? <DrawerNavigator /> : <AuthStack />}
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        {dataUser.isLogin ? <DrawerNavigator /> : <AuthStack />}
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 };
 

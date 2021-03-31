@@ -2,9 +2,9 @@ import React from 'react';
 import {View} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
-import NewsScreen from '../screens/newsscreen';
-import Userscreen from '../screens/usersscreen';
-import Cartscreen from '../screens/bookscreen';
+import ProductScreen from '../screens/productscreen';
+import HistoryScreen from '../screens/historyscreen';
+import Cartscreen from '../screens/cartscreen';
 import {Icon, Badge} from 'react-native-elements';
 import {useSelector, useDispatch} from 'react-redux';
 
@@ -63,9 +63,9 @@ const HomeTab = () => {
         },
       }}>
       <BottomTab.Screen name="Home" component={Home} />
-      <BottomTab.Screen name="Products" component={NewsScreen} />
+      <BottomTab.Screen name="Products" component={ProductScreen} />
       <BottomTab.Screen name="Cart" component={Cartscreen} />
-      <BottomTab.Screen name="Users" component={Userscreen} />
+      <BottomTab.Screen name="History" component={HistoryScreen} />
     </BottomTab.Navigator>
   );
 };
