@@ -24,6 +24,12 @@ export default ({route, navigation}) => {
     </TouchableWithoutFeedback>
   );
 
+  const TotalTransaksi = () => {
+    return route.params.data.products.reduce((prevval, val) => {
+      return prevval + val.qty * val.price;
+    }, 0);
+  };
+
   return (
     <View style={{flex: 1}}>
       <FlatList
@@ -31,6 +37,13 @@ export default ({route, navigation}) => {
         data={route.params.data.products}
         renderItem={renderItem}
       />
+      <ListItem bottomDivider>
+        <ListItem.Title></ListItem.Title>
+        <ListItem.Content>
+          <ListItem.Title>TOTAL</ListItem.Title>
+        </ListItem.Content>
+        <ListItem.Title>{currencyFormatter(TotalTransaksi())}</ListItem.Title>
+      </ListItem>
       {route.params.data.status === 'belum bayar' ? (
         <View>
           <Button
